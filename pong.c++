@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
-#include <iostream>
 #include <random>
 
 using namespace sf;
@@ -35,13 +34,13 @@ while (ventana.isOpen()){
 		if (evento.type == Event::Closed)
 			ventana.close();
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Up) and (barrady > 0))
+	if (Keyboard::isKeyPressed(Keyboard::Up) and barrady > 0)
 		barrady-=vbarra;
-	if (Keyboard::isKeyPressed(Keyboard::Down) and (barrady < 280))
+	if (Keyboard::isKeyPressed(Keyboard::Down) and barrady < 280)
 		barrady+=vbarra;
-	if (Keyboard::isKeyPressed(Keyboard::W)and (barraiy > 0))
+	if (Keyboard::isKeyPressed(Keyboard::W)and barraiy > 0)
 		barraiy-=vbarra;
-	if (Keyboard::isKeyPressed(Keyboard::S) and (barraiy < 280))
+	if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 280)
 		barraiy+=vbarra;
 		
 	int retraso = 0;	
@@ -122,6 +121,6 @@ while (ventana.isOpen()){
 	}*/
 	ventana.display();
 	
-	usleep(10000+retraso);//limita a 100 fps
+	usleep(10000+retraso);//limita a 100 fps + el retraso del sake
 }
 }
