@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <unistd.h>
 #include <cmath>
 
 using namespace sf;
@@ -18,6 +17,11 @@ int barraiy = 140, barrady = 140;
 Texture tbola; tbola.loadFromFile("bola.png");
 Sprite bola; bola.setTexture(tbola);
 int bolax = 280, bolay = 180;
+
+Texture tganai; tganai.loadFromFile("ganai.png");
+Sprite ganai; ganai.setTexture(tganai);
+Texture tganad; tganad.loadFromFile("ganad.png");
+Sprite ganad; ganad.setTexture(tganad);
 
 int puntosi = 0, puntosd = 0;
 char direccionx = 'd';
@@ -81,7 +85,7 @@ while (ventana.isOpen()){
 		bolay = 180;
 		direccionx = 'i';
 		angulo = -1;
-		retraso = 500000;
+		retraso = 500;
 		barrady = 140;
 		barraiy = 140;
 	}
@@ -91,7 +95,7 @@ while (ventana.isOpen()){
 		bolay = 180;
 		direccionx = 'd';
 		angulo = -1;
-		retraso = 500000;
+		retraso = 500;
 		barrady = 140;
 		barraiy = 140;
 	}
@@ -106,13 +110,11 @@ while (ventana.isOpen()){
 	ventana.draw(barrad);
 	ventana.draw(bola);
 	if (puntosi >= pvictoria){
-		Texture tganai; tganai.loadFromFile("ganai.png");
-		Sprite ganai; ganai.setTexture(tganai);
+
 		ventana.draw(ganai);
 		ventana.setTitle("pong: gana la barra izkierda");
 	}else if (puntosd >= pvictoria){
-		Texture tganad; tganad.loadFromFile("ganad.png");
-		Sprite ganad; ganad.setTexture(tganad);
+
 		ventana.draw(ganad);
 		ventana.setTitle("pong: gana la barra derecha");
 	}else
@@ -120,6 +122,6 @@ while (ventana.isOpen()){
 	
 	ventana.display();
 	
-	usleep(10000+retraso);//limita a 100 fps + el retraso del sake
+	sleep(milliseconds(10+retraso));//limita a 100 fps + el retraso del sake
 }
 }
