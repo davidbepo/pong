@@ -23,6 +23,7 @@ int puntosi = 0, puntosd = 0;
 char direccionx = 'd', direcciony = 'a';
 int aleatorio = 0;
 int vbola = 4, vbarra = 3;
+int pvictoria = 10;
 
 random_device rd;
 default_random_engine rng(rd());
@@ -105,20 +106,25 @@ while (ventana.isOpen()){
 	barrai.setPosition(0,barraiy);
 	barrad.setPosition(580,barrady);
 	bola.setPosition(bolax,bolay);
-	
-	ventana.setTitle("pong: " + to_string(puntosi) + " - " + to_string(puntosd));
 
 	ventana.clear();
 	ventana.draw(fondo);
 	ventana.draw(barrai);
 	ventana.draw(barrad);
 	ventana.draw(bola);
-	/*if (puntosi > 9){
-		ventana.draw(algo);
-	}
-	if (puntosd > 9){
-		ventana.draw(algo);
-	}*/
+	if (puntosi >= pvictoria){
+		Texture tganai; tganai.loadFromFile("ganai.png");
+		Sprite ganai; ganai.setTexture(tganai);
+		ventana.draw(ganai);
+		ventana.setTitle("pong: gana la barra izkierda");
+	}else if (puntosd >= pvictoria){
+		Texture tganad; tganad.loadFromFile("ganad.png");
+		Sprite ganad; ganad.setTexture(tganad);
+		ventana.draw(ganad);
+		ventana.setTitle("pong: gana la barra derecha");
+	}else
+		ventana.setTitle("pong: " + to_string(puntosi) + " - " + to_string(puntosd));
+	
 	ventana.display();
 	
 	usleep(10000+retraso);//limita a 100 fps + el retraso del sake
