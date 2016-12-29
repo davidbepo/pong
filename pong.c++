@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
-#include <random>
+#include <cmath>
 
 using namespace sf;
 using namespace std;
@@ -20,14 +20,10 @@ Sprite bola; bola.setTexture(tbola);
 int bolax = 280, bolay = 180;
 
 int puntosi = 0, puntosd = 0;
-char direccionx = 'd', direcciony = 'a';
-int aleatorio = 0;
+char direccionx = 'd';
+int angulo = -1;
 int vbola = 4, vbarra = 3;
 int pvictoria = 10;
-
-random_device rd;
-default_random_engine rng(rd());
-uniform_int_distribution<int> aleator(0,3);
 
 while (ventana.isOpen()){
 	Event evento;
@@ -37,18 +33,18 @@ while (ventana.isOpen()){
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Up) and barrady > 0)
 		barrady-=vbarra;
-	if (Keyboard::isKeyPressed(Keyboard::Down) and barrady < 280)
+	if (Keyboard::isKeyPressed(Keyboard::Down) and barrady < 300)
 		barrady+=vbarra;
 	if (Keyboard::isKeyPressed(Keyboard::W)and barraiy > 0)
 		barraiy-=vbarra;
-	if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 280)
+	if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 300)
 		barraiy+=vbarra;
 		
 	int retraso = 0;	
 	int limited=580,limitei=0;
-	if  (bolay-104 < barrady and barrady < bolay+24)
+	if  (bolay-100 < barrady and barrady < bolay+10)
 		limited = 560;
-	if  (bolay-104 < barraiy and barraiy < bolay+24)
+	if  (bolay-100 < barraiy and barraiy < bolay+10)
 		limitei = 20;
 	
 	if (puntosi > 3 or puntosd > 3)
@@ -63,31 +59,28 @@ while (ventana.isOpen()){
 	else
 		bolax -= vbola;
 	
-	if (bolax > limited){
+	if (bolax > limited and limited == 560){
 		direccionx = 'i';
-		aleatorio = aleator(rng);
+		angulo += 2-(100+(barrady - bolay)) / 25;
 	}
-	if (bolax < limitei){
+	if (bolax < limitei and limitei == 20){
 		direccionx = 'd';
-		aleatorio = aleator(rng);
+		angulo += 2-(100+(barraiy - bolay)) / 25;
 	}
 	
 	if (bolay < 0)
-		direcciony = 'b';
+		angulo = abs(angulo);
 	if (bolay > 380)
-		direcciony = 'a';
+		angulo -= angulo * 2;
 	
-	if (direcciony == 'b')
-		bolay+=aleatorio;
-	else
-		bolay-=aleatorio;
+	bolay+=angulo;
 	
 	if (bolax > 580){
 		puntosi += 1;
 		bolax = 280;
 		bolay = 180;
 		direccionx = 'i';
-		aleatorio = 0;
+		angulo = -1;
 		retraso = 500000;
 		barrady = 140;
 		barraiy = 140;
@@ -97,7 +90,7 @@ while (ventana.isOpen()){
 		bolax = 280;
 		bolay = 180;
 		direccionx = 'd';
-		aleatorio = 0;
+		angulo = -1;
 		retraso = 500000;
 		barrady = 140;
 		barraiy = 140;
