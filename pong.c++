@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <cmath>
 
 using namespace sf;
 using namespace std;
@@ -108,10 +107,8 @@ while (ventana.isOpen()){
 			angulo += 2-(100+(barraiy-bolay))/25;
 		}
 		
-		if (bolay < 0)
-			angulo = abs(angulo);
-		if (bolay > 380)
-			angulo -= angulo*2;
+		if (bolay < 0 or bolay > 380)
+			angulo = -angulo;
 		
 		bolay+=angulo;
 		
