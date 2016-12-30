@@ -16,10 +16,11 @@ Texture tbola; tbola.loadFromFile("bola.png");
 Sprite bola; bola.setTexture(tbola);
 int bolax = 280, bolay = 180;
 
-Texture tganai; tganai.loadFromFile("ganai.png");
-Sprite ganai; ganai.setTexture(tganai);
-Texture tganad; tganad.loadFromFile("ganad.png");
-Sprite ganad; ganad.setTexture(tganad);
+Font ubuntu; ubuntu.loadFromFile("Ubuntu-M.ttf");
+Text ganai; ganai.setFont(ubuntu); 
+ganai.setString("gana la \nbarra \nizkierda"); ganai.setCharacterSize(111); ganai.setFillColor(Color::Black);
+Text ganad; ganad.setFont(ubuntu); 
+ganad.setString("gana la \nbarra \nderecha"); ganad.setCharacterSize(111); ganad.setFillColor(Color::Black);
 
 int puntosi = 0, puntosd = 0;
 char direccionx = 'd';
@@ -103,9 +104,11 @@ while (ventana.isOpen()){
 	ventana.draw(barrad);
 	ventana.draw(bola);
 	if (puntosi >= pvictoria){
+		ventana.clear(Color::White);
 		ventana.draw(ganai);
 		ventana.setTitle("pong: gana la barra izkierda");
 	}else if (puntosd >= pvictoria){
+		ventana.clear(Color::White);
 		ventana.draw(ganad);
 		ventana.setTitle("pong: gana la barra derecha");
 	}else
