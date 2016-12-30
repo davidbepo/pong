@@ -7,9 +7,6 @@ using namespace std;
 int main(){
 RenderWindow ventana(VideoMode(600,400), "pong");
 
-Texture tfondo; tfondo.loadFromFile("fondo.jpg");
-Sprite fondo; fondo.setTexture(tfondo);
-
 Texture	tbarra; tbarra.loadFromFile("barra.png");
 Sprite barrai; barrai.setTexture(tbarra);
 Sprite barrad; barrad.setTexture(tbarra);
@@ -101,8 +98,7 @@ while (ventana.isOpen()){
 	barrad.setPosition(580,barrady);
 	bola.setPosition(bolax,bolay);
 
-	ventana.clear();
-	ventana.draw(fondo);
+	ventana.clear(Color::White);
 	ventana.draw(barrai);
 	ventana.draw(barrad);
 	ventana.draw(bola);
