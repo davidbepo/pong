@@ -54,7 +54,7 @@ char direccionx = 'd';
 char ganador = ' ';
 int angulo = -1;
 int pvictoria = 10;
-int tipo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
+int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
 int sakeinicial = 1;
 
 while (ventana.isOpen()){
@@ -64,7 +64,7 @@ while (ventana.isOpen()){
 			cerrar:
 			ventana.close();
 	}
-	if (tipo == 0){
+	if (modo == 0){
 		int posicion[4] = {0,30,130,230};
 		int retraso = 0;
 		if (Keyboard::isKeyPressed(Keyboard::Up)){
@@ -79,8 +79,8 @@ while (ventana.isOpen()){
 		}
 		flecha.setPosition(5,posicion[seleccion]);
 		if (Keyboard::isKeyPressed(Keyboard::Return)){
-			tipo = seleccion;
-			if (tipo < 3)
+			modo = seleccion;
+			if (modo < 3)
 				flecha.setPosition(20,280);
 			else{
 				flecha.setPosition(400,20);
@@ -97,19 +97,19 @@ while (ventana.isOpen()){
 		sleep(milliseconds(20+retraso));
 	}
 	
-	if (tipo == 1){
+	if (modo == 1){
 		if (barraiy+50 > bolay and barraiy > 0 and bolax < vistaia)
 			barraiy -= vbarra;
 		if (barraiy+50 < bolay and barraiy < 300 and bolax < vistaia)
 			barraiy += vbarra;
 	}
-	if (tipo == 2){
+	if (modo == 2){
 		if (Keyboard::isKeyPressed(Keyboard::W)and barraiy > 0)
 			barraiy -= vbarra;
 		if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 300)
 			barraiy += vbarra;
 	}
-	if (tipo == 1 or tipo == 2){
+	if (modo == 1 or modo == 2){
 		if (Keyboard::isKeyPressed(Keyboard::Up) and barrady > 0)
 			barrady -= vbarra;
 		if (Keyboard::isKeyPressed(Keyboard::Down) and barrady < 300)
@@ -176,21 +176,21 @@ while (ventana.isOpen()){
 		ventana.draw(bola);
 		if (puntosi >= pvictoria and not(puntosd >= pvictoria)){
 			ganador = 'i';
-			if (tipo == 1){
+			if (modo == 1){
 				gana.setString("gana la IA. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: ha ganado la IA");
 			}
-			if (tipo == 2){
+			if (modo == 2){
 				gana.setString("gana la izkierda. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: ha ganado la barra izkierda");
 			}
 		}if (puntosd >= pvictoria and not(puntosi >= pvictoria)){
 			ganador = 'd';
-			if (tipo == 1){
+			if (modo == 1){
 				gana.setString("tu ganas. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: has ganado");
 			}
-			if ( tipo == 2){
+			if ( modo == 2){
 				gana.setString("gana la derecha. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: ha ganado la barra derecha");
 			}
@@ -225,7 +225,7 @@ while (ventana.isOpen()){
 		else
 			sleep(milliseconds(10));//limita a 100 fps
 	}
-	if (tipo == 3){
+	if (modo == 3){
 		ventana.clear(Color::White);
 		int posicion[5][2] = {{0,400},{20,400},{120,400},{220,400},{320,120}};
 		int retraso = 0;
@@ -264,7 +264,7 @@ while (ventana.isOpen()){
 		if (Keyboard::isKeyPressed(Keyboard::Return) and ajuste == 4){
 			vbola = vbolainicial;
 			seleccion = 1;
-			tipo = 0;
+			modo = 0;
 			flecha.setPosition(5,30);
 			retraso = 0;
 		}
