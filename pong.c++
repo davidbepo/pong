@@ -244,9 +244,6 @@ while (ventana.isOpen()){
 				vbolainicial += 1;
 			if (ajuste == 3 and rsake < 950)
 				rsake += 50;
-			nvia.setString(to_string(vistaia));
-			nvbo.setString(to_string(vbolainicial));
-			ndelay.setString(to_string(rsake));
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Left)){
 			retraso = 25;	
@@ -256,10 +253,10 @@ while (ventana.isOpen()){
 				vbolainicial -= 1;
 			if (ajuste == 3 and rsake > 50)
 				rsake -= 50;
-			nvia.setString(to_string(vistaia));
-			nvbo.setString(to_string(vbolainicial));
-			ndelay.setString(to_string(rsake));	
 		}
+		nvia.setString(to_string(vistaia));
+		nvbo.setString(to_string(vbolainicial));
+		ndelay.setString(to_string(rsake));
 		flecha.setPosition(posicion[ajuste][1],posicion[ajuste][0]);
 		if (Keyboard::isKeyPressed(Keyboard::Return) and ajuste == 4){
 			vbola = vbolainicial;
