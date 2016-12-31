@@ -40,7 +40,10 @@ Text aceptar; aceptar.setFont(ubuntu); aceptar.setString("aceptar");
 aceptar.setCharacterSize(66); aceptar.setFillColor(Color::Black); aceptar.setPosition(200,310);
 
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
-Sprite flecha; flecha.setTexture(tcyan); 
+Sprite flecha; flecha.setTexture(tcyan);
+
+unsigned int vbolainicial = 4, vbola = vbolainicial, vbarra = 3;
+unsigned int vistaia = 300, rsake = 500;
 inicio:
 ventana.setTitle("pong");
 flecha.setPosition(5,73);
@@ -50,10 +53,9 @@ unsigned int puntosi = 0, puntosd = 0;
 char direccionx = 'd';
 char ganador = ' ';
 int angulo = -1;
-unsigned int vbolainicial = 4, vbola = vbolainicial, vbarra = 3;
 int pvictoria = 10;
 int tipo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
-unsigned int vistaia = 300, rsake = 500;
+int sakeinicial = 1;
 
 while (ventana.isOpen()){
 	Event evento;
@@ -154,7 +156,8 @@ while (ventana.isOpen()){
 			puntosd += 1;
 			direccionx = 'd';
 		}
-		if (bolax >= 580 or bolax <= 0){
+		if (bolax >= 580 or bolax <= 0 or sakeinicial == 1){
+			sakeinicial = 0;
 			bolax = 280;
 			bolay = 180;
 			angulo = -1;
@@ -181,7 +184,7 @@ while (ventana.isOpen()){
 				gana.setString("gana la izkierda. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: ha ganado la barra izkierda");
 			}
-		}else if (puntosd >= pvictoria){
+		}if (puntosd >= pvictoria and not(puntosi >= pvictoria)){
 			ganador = 'd';
 			if (tipo == 1){
 				gana.setString("tu ganas. \nreiniciar? \n\n      si       no");
@@ -229,12 +232,12 @@ while (ventana.isOpen()){
 		if (Keyboard::isKeyPressed(Keyboard::Up)){
 			if (ajuste > 1)
 				ajuste -= 1;
-			retraso = 250;	
+			retraso = 150;	
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Down)){
 			if (ajuste < 4)
 				ajuste += 1;
-			retraso = 250;	
+			retraso = 150;	
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Right)){
 			retraso = 25;	
@@ -263,7 +266,7 @@ while (ventana.isOpen()){
 			seleccion = 1;
 			tipo = 0;
 			flecha.setPosition(5,30);
-			retraso = 250;
+			retraso = 0;
 		}
 		ventana.draw(via); ventana.draw(nvia);
 		ventana.draw(vbo); ventana.draw(nvbo);
@@ -273,5 +276,6 @@ while (ventana.isOpen()){
 		ventana.display();
 		sleep(milliseconds(100+retraso));
 	}
+	
 }
 }
