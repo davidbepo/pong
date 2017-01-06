@@ -26,10 +26,10 @@ via.setCharacterSize(48); via.setFillColor(Color::Black); via.setPosition(10,10)
 Text nvia; nvia.setFont(ubuntu); nvia.setString("300");
 nvia.setCharacterSize(64); nvia.setFillColor(Color::Black); nvia.setPosition(480,10);
 
-Text vbo; vbo.setFont(ubuntu); vbo.setString("velocidad");
-vbo.setCharacterSize(48); vbo.setFillColor(Color::Black); vbo.setPosition(10,110);
-Text nvbo; nvbo.setFont(ubuntu); nvbo.setString("5");
-nvbo.setCharacterSize(64); nvbo.setFillColor(Color::Black); nvbo.setPosition(480,110);
+Text vel; vel.setFont(ubuntu); vel.setString("velocidad");
+vel.setCharacterSize(48); vel.setFillColor(Color::Black); vel.setPosition(10,110);
+Text nvel; nvel.setFont(ubuntu); nvel.setString("5");
+nvel.setCharacterSize(64); nvel.setFillColor(Color::Black); nvel.setPosition(480,110);
 
 Text delay; delay.setFont(ubuntu); delay.setString("retraso del sake");
 delay.setCharacterSize(48); delay.setFillColor(Color::Black); delay.setPosition(10,210);
@@ -42,13 +42,14 @@ aceptar.setCharacterSize(66); aceptar.setFillColor(Color::Black); aceptar.setPos
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
 Sprite flecha; flecha.setTexture(tcyan);
 
-unsigned int vbolainicial = 4, vbola = vbolainicial, vbarra = 3;
+unsigned int vbolainicial = 4, vbarra = 3;
 unsigned int vistaia = 300, rsake = 500;
 inicio:
 ventana.setTitle("pong");
 flecha.setPosition(5,73);
 int barraiy = 140, barrady = 140;
 int bolax = 280, bolay = 180;
+unsigned int vbola = vbolainicial;
 unsigned int puntosi = 0, puntosd = 0;
 char direccionx = 'd';
 char ganador = ' ';
@@ -59,26 +60,35 @@ int sakeinicial = 1;
 
 while (ventana.isOpen()){
 	Event evento;
+	bool abajo=false,arriba=false,izkierda=false,derecha=false,enter=false;
 	while (ventana.pollEvent(evento)){
 		if (evento.type == Event::Closed)
 			cerrar:
 			ventana.close();
+		if (evento.type == Event::KeyReleased){
+			if(evento.key.code == Keyboard::Up)
+				arriba = true;
+			if (evento.key.code == Keyboard::Down)
+				abajo = true;
+			if (evento.key.code == Keyboard::Left)
+				izkierda = true;
+			if (evento.key.code == Keyboard::Right)
+				derecha = true;
+			if (evento.key.code == Keyboard::Return)
+				enter = true;
+		}
 	}
 	if (modo == 0){
 		int posicion[4] = {0,30,130,230};
-		int retraso = 0;
-		if (Keyboard::isKeyPressed(Keyboard::Up)){
+		if (arriba){
 			if (seleccion > 1)
-				seleccion -= 1;
-			retraso = 250;	
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Down)){
+				seleccion -= 1;		}
+		if (abajo){
 			if (seleccion < 3)
 				seleccion += 1;
-			retraso = 250;	
 		}
 		flecha.setPosition(5,posicion[seleccion]);
-		if (Keyboard::isKeyPressed(Keyboard::Return)){
+		if (enter){
 			modo = seleccion;
 			if (modo < 3)
 				flecha.setPosition(20,280);
@@ -86,7 +96,6 @@ while (ventana.isOpen()){
 				flecha.setPosition(400,20);
 				ajuste = 1;
 			}
-			retraso = 0;
 		}
 		ventana.clear(Color::White);
 		ventana.draw(uj);
@@ -94,7 +103,7 @@ while (ventana.isOpen()){
 		ventana.draw(op);
 		ventana.draw(flecha);
 		ventana.display();
-		sleep(milliseconds(20+retraso));
+		sleep(milliseconds(20));
 	}
 	
 	if (modo == 1){
@@ -104,7 +113,7 @@ while (ventana.isOpen()){
 			barraiy += vbarra;
 	}
 	if (modo == 2){
-		if (Keyboard::isKeyPressed(Keyboard::W)and barraiy > 0)
+		if (Keyboard::isKeyPressed(Keyboard::W) and barraiy > 0)
 			barraiy -= vbarra;
 		if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 300)
 			barraiy += vbarra;
@@ -199,21 +208,19 @@ while (ventana.isOpen()){
 		if (ganador != ' '){
 			ventana.clear(Color::White);
 			ventana.draw(gana);
-			if (Keyboard::isKeyPressed(Keyboard::Left)){
+			if (izkierda){
 				flecha.setPosition(20,280);
 				reiniciar = 1;
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Right)){
+			if (derecha){
 				flecha.setPosition(200,280);
 				reiniciar = 0;
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Return)){
+			if (enter){
 				if (reiniciar == 0)
 					goto cerrar;
-				else{
-					sleep(milliseconds(250));
+				else
 					goto inicio;
-				}
 			}
 			ventana.draw(flecha);
 		}else
@@ -229,15 +236,13 @@ while (ventana.isOpen()){
 		ventana.clear(Color::White);
 		int posicion[5][2] = {{0,400},{20,400},{120,400},{220,400},{320,120}};
 		int retraso = 0;
-		if (Keyboard::isKeyPressed(Keyboard::Up)){
+		if (arriba){
 			if (ajuste > 1)
 				ajuste -= 1;
-			retraso = 150;	
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Down)){
+		if (abajo){
 			if (ajuste < 4)
 				ajuste += 1;
-			retraso = 150;	
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Right)){
 			retraso = 25;	
@@ -258,23 +263,22 @@ while (ventana.isOpen()){
 				rsake -= 50;
 		}
 		nvia.setString(to_string(vistaia));
-		nvbo.setString(to_string(vbolainicial));
+		nvel.setString(to_string(vbolainicial));
 		ndelay.setString(to_string(rsake));
 		flecha.setPosition(posicion[ajuste][1],posicion[ajuste][0]);
-		if (Keyboard::isKeyPressed(Keyboard::Return) and ajuste == 4){
+		if (enter and ajuste == 4){
 			vbola = vbolainicial;
 			seleccion = 1;
 			modo = 0;
 			flecha.setPosition(5,30);
-			retraso = 0;
 		}
 		ventana.draw(via); ventana.draw(nvia);
-		ventana.draw(vbo); ventana.draw(nvbo);
+		ventana.draw(vel); ventana.draw(nvel);
 		ventana.draw(delay); ventana.draw(ndelay);
 		ventana.draw(aceptar);
 		ventana.draw(flecha);
 		ventana.display();
-		sleep(milliseconds(100+retraso));
+		sleep(milliseconds(20+retraso));
 	}
 	
 }
