@@ -63,7 +63,6 @@ while (ventana.isOpen()){
 	bool abajo=false,arriba=false,izkierda=false,derecha=false,enter=false;
 	while (ventana.pollEvent(evento)){
 		if (evento.type == Event::Closed)
-			cerrar:
 			ventana.close();
 		if (evento.type == Event::KeyReleased){
 			if(evento.key.code == Keyboard::Up)
@@ -219,7 +218,7 @@ while (ventana.isOpen()){
 			}
 			if (enter){
 				if (reiniciar == 0)
-					goto cerrar;
+					ventana.close();
 				else
 					goto inicio;
 			}
