@@ -85,7 +85,9 @@ while (ventana.isOpen()){
 		flecha.setPosition(5,posicion[seleccion]);
 		if (enter){
 			modo = seleccion;
-			if (modo == 3)
+			if (modo < 3)
+				reiniciar = 1;
+			else
 				ajuste = 1;
 		}
 		ventana.clear(Color::White);
@@ -136,11 +138,11 @@ while (ventana.isOpen()){
 		
 		if (bolax > limited and limited == 560){
 			direccionx = 'i';
-			angulo += 2-(100+(barrady-bolay))/20;
+			angulo += 2-(100+(barrady-bolay))/25;
 		}
 		if (bolax < limitei and limitei == 20){
 			direccionx = 'd';
-			angulo += 2-(100+(barraiy-bolay))/20;
+			angulo += 2-(100+(barraiy-bolay))/25;
 		}
 		
 		if (bolay < 0 or bolay > 380)
@@ -200,14 +202,15 @@ while (ventana.isOpen()){
 		if (ganador != ' '){
 			ventana.clear(Color::White);
 			ventana.draw(gana);
-			if (izkierda){
-				flecha.setPosition(20,280);
+			if (izkierda)
 				reiniciar = 1;
-			}
-			if (derecha){
-				flecha.setPosition(200,280);
+			if (derecha)
 				reiniciar = 0;
-			}
+			
+			if (reiniciar == 1)
+				flecha.setPosition(20,280);
+			else
+				flecha.setPosition(200,280);
 			if (enter){
 				if (reiniciar == 0)
 					ventana.close();
