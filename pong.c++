@@ -55,8 +55,8 @@ char direccionx = 'd';
 char ganador = ' ';
 int angulo = -1;
 int pvictoria = 10;
-int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
-int sakeinicial = 1;
+unsigned int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
+unsigned int sakeinicial = 1;
 
 while (ventana.isOpen()){
 	Event evento;
@@ -246,7 +246,7 @@ while (ventana.isOpen()){
 				ajuste += 1;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Right)){
-			retraso = 25;	
+			retraso = 130;	
 			if (ajuste == 1 and vistaia < 600)
 				vistaia += 10;
 			if (ajuste == 2 and vbolainicial < 999)
@@ -255,7 +255,7 @@ while (ventana.isOpen()){
 				rsake += 50;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Left)){
-			retraso = 25;	
+			retraso = 130;	
 			if (ajuste == 1 and vistaia > 10)
 				vistaia -= 10;
 			if (ajuste == 2 and vbolainicial > 1)
