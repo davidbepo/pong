@@ -82,7 +82,8 @@ while (ventana.isOpen()){
 		int posicion[4] = {0,30,130,230};
 		if (arriba){
 			if (seleccion > 1)
-				seleccion -= 1;		}
+				seleccion -= 1;
+		}
 		if (abajo){
 			if (seleccion < 3)
 				seleccion += 1;
@@ -280,6 +281,5 @@ while (ventana.isOpen()){
 		ventana.display();
 		sleep(milliseconds(20+retraso));
 	}
-	
 }
 }
