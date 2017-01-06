@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 using namespace sf;
 using namespace std;
@@ -47,16 +48,14 @@ unsigned int vistaia = 300, rsake = 500;
 inicio:
 ventana.setTitle("pong");
 flecha.setPosition(5,73);
-int barraiy = 140, barrady = 140;
-int bolax = 280, bolay = 180;
+int barraiy = 140, barrady = 140, bolax = 280, bolay = 180;
 unsigned int vbola = vbolainicial;
 unsigned int puntosi = 0, puntosd = 0;
 char direccionx = 'd';
 char ganador = ' ';
 int angulo = -1;
 int pvictoria = 10;
-unsigned int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1;
-unsigned int sakeinicial = 1;
+unsigned int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1, sakeinicial = 1;
 
 while (ventana.isOpen()){
 	Event evento;
@@ -79,23 +78,15 @@ while (ventana.isOpen()){
 	}
 	if (modo == 0){
 		int posicion[4] = {0,30,130,230};
-		if (arriba){
-			if (seleccion > 1)
-				seleccion -= 1;
-		}
-		if (abajo){
-			if (seleccion < 3)
-				seleccion += 1;
-		}
+		if (arriba and seleccion > 1)
+			seleccion -= 1;
+		if (abajo and seleccion < 3)
+			seleccion += 1;
 		flecha.setPosition(5,posicion[seleccion]);
 		if (enter){
 			modo = seleccion;
-			if (modo < 3)
-				flecha.setPosition(20,280);
-			else{
-				flecha.setPosition(400,20);
+			if (modo == 3)
 				ajuste = 1;
-			}
 		}
 		ventana.clear(Color::White);
 		ventana.draw(uj);
@@ -193,7 +184,8 @@ while (ventana.isOpen()){
 				gana.setString("gana la izkierda. \nreiniciar? \n\n      si       no");
 				ventana.setTitle("pong: ha ganado la barra izkierda");
 			}
-		}if (puntosd >= pvictoria and not(puntosi >= pvictoria)){
+		}
+		if (puntosd >= pvictoria and not(puntosi >= pvictoria)){
 			ganador = 'd';
 			if (modo == 1){
 				gana.setString("tu ganas. \nreiniciar? \n\n      si       no");
@@ -236,14 +228,12 @@ while (ventana.isOpen()){
 		ventana.clear(Color::White);
 		int posicion[5][2] = {{0,400},{20,400},{120,400},{220,400},{320,120}};
 		int retraso = 0;
-		if (arriba){
-			if (ajuste > 1)
-				ajuste -= 1;
-		}
-		if (abajo){
-			if (ajuste < 4)
-				ajuste += 1;
-		}
+		
+		if (arriba and ajuste > 1)
+			ajuste -= 1;
+		if (abajo and ajuste < 4)
+			ajuste += 1;
+
 		if (Keyboard::isKeyPressed(Keyboard::Right)){
 			retraso = 130;	
 			if (ajuste == 1 and vistaia < 600)
@@ -270,7 +260,6 @@ while (ventana.isOpen()){
 			vbola = vbolainicial;
 			seleccion = 1;
 			modo = 0;
-			flecha.setPosition(5,30);
 		}
 		ventana.draw(via); ventana.draw(nvia);
 		ventana.draw(vel); ventana.draw(nvel);
