@@ -231,7 +231,7 @@ while (ventana.isOpen()){
 		if (puntosi < pvictoria and puntosd < pvictoria)
 			sleep(milliseconds(10+retraso));//limita a 100 fps + el retraso del sake
 		else
-			sleep(milliseconds(10));//limita a 100 fps
+			sleep(milliseconds(20));//limita a 50 fps cuando alguien ha ganado
 	}
 	if (modo == 3){
 		ventana.clear(Color::White);
