@@ -52,15 +52,13 @@ aceptar.setCharacterSize(66); aceptar.setFillColor(Color::Black); aceptar.setPos
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
 Sprite flecha; flecha.setTexture(tcyan);
 
-unsigned int vbolainicial = 4, vbarra = 3;
-unsigned int vistaia = 300, rsake = 500;
+unsigned int vbolainicial = 4, vbarra = 3, vistaia = 300, rsake = 500;
 bool sonidosactivados = true;
 inicio:
 ventana.setTitle("pong");
 flecha.setPosition(5,73);
 int barraiy = 140, barrady = 140, bolax = 280, bolay = 180;
-unsigned int vbola = vbolainicial;
-unsigned int puntosi = 0, puntosd = 0;
+unsigned int vbola = vbolainicial, puntosi = 0, puntosd = 0;
 char direccionx = 'd';
 char ganador = ' ';
 int angulo = -1;
@@ -106,7 +104,7 @@ while (ventana.isOpen()){
 		sleep(milliseconds(20));
 	}
 	
-	if (modo == 1){
+	if (modo == 1){// codigo de la ia
 		if (barraiy+50 > bolay and barraiy > 0 and bolax < vistaia)
 			barraiy -= vbarra;
 		if (barraiy+50 < bolay and barraiy < 300 and bolax < vistaia)
@@ -161,7 +159,6 @@ while (ventana.isOpen()){
 				if (sonidosactivados) 
 					boingp.play();
 			}
-			
 			bolay+=angulo;
 			
 			if (bolax >= 580){
@@ -223,7 +220,6 @@ while (ventana.isOpen()){
 				reiniciar = 1;
 			if (derecha)
 				reiniciar = 0;
-			
 			if (reiniciar == 1)
 				flecha.setPosition(20,280);
 			else
@@ -283,6 +279,7 @@ while (ventana.isOpen()){
 			asonidos.setString("si");
 		else
 			asonidos.setString("no");
+		
 		flecha.setPosition(posicion[ajuste][1],posicion[ajuste][0]);
 		if (enter and ajuste == 5){
 			vbola = vbolainicial;
