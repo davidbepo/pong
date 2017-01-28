@@ -124,9 +124,9 @@ while (ventana.isOpen()){
 		int retraso = 0;
 		if (puntosi < pvictoria and puntosd < pvictoria){
 			int limited = 580, limitei = 0;
-			if  (bolay-100 < barrady and barrady < bolay+12)
+			if  (bolay < barrady+105 and barrady-5 < bolay)
 				limited = 560;
-			if  (bolay-100 < barraiy and barraiy < bolay+12)
+			if  (bolay < barraiy+105 and barraiy-5 < bolay)
 				limitei = 20;
 			
 			if (puntosi > 3 or puntosd > 3)
