@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -144,9 +143,7 @@ while (ventana.isOpen()){
 			
 			if (bolax > limited and limited == 560){
 				direccionx = 'i';
-				cout << angulo << " , ";
 				angulo += 2-(100+(barrady-bolay))/20;
-				cout << angulo << endl;
 				if (sonidosactivados) 
 					boing.play();
 			}
