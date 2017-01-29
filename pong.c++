@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -50,7 +51,7 @@ Text aceptar; aceptar.setFont(ubuntu); aceptar.setString("aceptar");
 aceptar.setCharacterSize(66); aceptar.setFillColor(Color::Black); aceptar.setPosition(200,310);
 
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
-Sprite flecha; flecha.setTexture(tcyan);
+Sprite flecha(tcyan);
 
 unsigned int vbolainicial = 4, vbarra = 3, vistaia = 300, rsake = 500;
 bool sonidosactivados = true;
@@ -110,7 +111,7 @@ while (ventana.isOpen()){
 		if (barraiy+50 < bolay and barraiy < 300 and bolax < vistaia)
 			barraiy += vbarra;
 	}
-	if (modo == 2){
+	if (modo == 2){//codigo del segundo jugador
 		if (Keyboard::isKeyPressed(Keyboard::W) and barraiy > 0)
 			barraiy -= vbarra;
 		if (Keyboard::isKeyPressed(Keyboard::S) and barraiy < 300)
@@ -143,13 +144,15 @@ while (ventana.isOpen()){
 			
 			if (bolax > limited and limited == 560){
 				direccionx = 'i';
-				angulo += 2-(100+(barrady-bolay))/25;
+				cout << angulo << " , ";
+				angulo += 2-(100+(barrady-bolay))/20;
+				cout << angulo << endl;
 				if (sonidosactivados) 
 					boing.play();
 			}
 			if (bolax < limitei and limitei == 20){
 				direccionx = 'd';
-				angulo += 2-(100+(barraiy-bolay))/25;
+				angulo += 2-(100+(barraiy-bolay))/20;
 				if (sonidosactivados) 
 					boing.play();
 			}
