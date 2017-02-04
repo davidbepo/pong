@@ -124,9 +124,9 @@ while (ventana.isOpen()){
 		int retraso = 0;
 		if (puntosi < pvictoria and puntosd < pvictoria){
 			int limited = 580, limitei = 0;
-			if  (bolay < barrady+105 and barrady-5 < bolay)
+			if  (bolay < barrady+107 and barrady-7 < bolay)
 				limited = 560;
-			if  (bolay < barraiy+105 and barraiy-5 < bolay)
+			if  (bolay < barraiy+107 and barraiy-7 < bolay)
 				limitei = 20;
 			
 			if (puntosi > 3 or puntosd > 3)
@@ -143,13 +143,13 @@ while (ventana.isOpen()){
 			
 			if (bolax > limited and limited == 560){
 				direccionx = 'i';
-				angulo += 2-(100+(barrady-bolay))/20;
+				angulo += 2-(100+(barrady-bolay))/25;
 				if (sonidosactivados) 
 					boing.play();
 			}
 			if (bolax < limitei and limitei == 20){
 				direccionx = 'd';
-				angulo += 2-(100+(barraiy-bolay))/20;
+				angulo += 2-(100+(barraiy-bolay))/25;
 				if (sonidosactivados) 
 					boing.play();
 			}
