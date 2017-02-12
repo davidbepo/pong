@@ -4,7 +4,7 @@
 using namespace sf;
 using namespace std;
 
-int main(){
+int main() {
 RenderWindow ventana(VideoMode(600,400), "pong");
 
 Music boing; boing.openFromFile("Boing.ogg");
@@ -129,9 +129,9 @@ while (ventana.isOpen()){
 			if  (bolay < barraiy+107 and barraiy-7 < bolay)
 				limitei = 20;
 			
-			if (puntosi > 3 or puntosd > 3)
+			if (puntosi >= 3 or puntosd >= 3)
 				vbola = vbolainicial + 1;
-			if (puntosi > 7 or puntosd > 7){
+			if (puntosi >= 7 or puntosd >= 7){
 				vbola = vbolainicial + 2;
 				vbarra = 4;
 			}
