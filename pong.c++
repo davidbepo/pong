@@ -236,7 +236,7 @@ while (ventana.isOpen()){
 		
 		ventana.display();
 		if (puntosi < pvictoria and puntosd < pvictoria)
-			sleep(milliseconds(50+retraso));//limita a 100 fps + el retraso del sake
+			sleep(milliseconds(10+retraso));//limita a 100 fps + el retraso del sake
 		else
 			sleep(milliseconds(20));//limita a 50 fps cuando alguien ha ganado
 	}
