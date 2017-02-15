@@ -9,7 +9,7 @@ RenderWindow ventana(VideoMode(600,400), "pong");
 
 Music boing; boing.openFromFile("Boing.ogg");
 Music boingp; boingp.openFromFile("Boingp.ogg");
-Music sii; sii.openFromFile("sii.ogg"); 
+Music sii; sii.openFromFile("sii.ogg");
 
 RectangleShape barrai(Vector2f(20,100)); barrai.setFillColor(Color::Cyan);
 RectangleShape barrad(Vector2f(20,100)); barrad.setFillColor(Color::Cyan);
@@ -124,9 +124,9 @@ while (ventana.isOpen()){
 		int retraso = 0;
 		if (puntosi < pvictoria and puntosd < pvictoria){
 			int limited = 580, limitei = 0;
-			if  (bolay < barrady+107 and barrady-7 < bolay)
+			if  (bolay < barrady+100 and barrady-10 < bolay)
 				limited = 560;
-			if  (bolay < barraiy+107 and barraiy-7 < bolay)
+			if  (bolay < barraiy+100 and barraiy-10 < bolay)
 				limitei = 20;
 			
 			if (puntosi >= 3 or puntosd >= 3)
@@ -236,7 +236,7 @@ while (ventana.isOpen()){
 		
 		ventana.display();
 		if (puntosi < pvictoria and puntosd < pvictoria)
-			sleep(milliseconds(10+retraso));//limita a 100 fps + el retraso del sake
+			sleep(milliseconds(50+retraso));//limita a 100 fps + el retraso del sake
 		else
 			sleep(milliseconds(20));//limita a 50 fps cuando alguien ha ganado
 	}
