@@ -105,9 +105,9 @@ while (ventana.isOpen()){
 	}
 	
 	if (modo == 1){// codigo de la ia
-		if (barraiy+50 > bolay and barraiy > 0 and bolax < vistaia)
+		if (barraiy+40 > bolay and barraiy > 0 and bolax < vistaia)
 			barraiy -= vbarra;
-		if (barraiy+50 < bolay and barraiy < 300 and bolax < vistaia)
+		if (barraiy+40 < bolay and barraiy < 300 and bolax < vistaia)
 			barraiy += vbarra;
 	}
 	if (modo == 2){//codigo del segundo jugador
@@ -124,9 +124,9 @@ while (ventana.isOpen()){
 		int retraso = 0;
 		if (puntosi < pvictoria and puntosd < pvictoria){
 			int limited = 580, limitei = 0;
-			if  (bolay < barrady+100 and barrady-10 < bolay)
+			if  (bolay < barrady+90 and barrady-10 < bolay)
 				limited = 560;
-			if  (bolay < barraiy+100 and barraiy-10 < bolay)
+			if  (bolay < barraiy+90 and barraiy-10 < bolay)
 				limitei = 20;
 			
 			if (puntosi >= 3 or puntosd >= 3)
@@ -143,13 +143,13 @@ while (ventana.isOpen()){
 			
 			if (bolax > limited and limited == 560){
 				direccionx = 'i';
-				angulo += 2-(100+(barrady-bolay))/25;
+				angulo += 2-(100+(barrady+10-bolay))/25;
 				if (sonidosactivados) 
 					boing.play();
 			}
 			if (bolax < limitei and limitei == 20){
 				direccionx = 'd';
-				angulo += 2-(100+(barraiy-bolay))/25;
+				angulo += 2-(100+(barraiy+10-bolay))/25;
 				if (sonidosactivados) 
 					boing.play();
 			}
