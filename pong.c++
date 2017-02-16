@@ -105,9 +105,9 @@ while (ventana.isOpen()){
 	}
 	
 	if (modo == 1){// codigo de la ia
-		if (barraiy+40 > bolay and barraiy > 0 and bolax < vistaia)
+		if (barraiy+40 > bolay and barraiy > 0 and bolax < vistaia and direccionx == 'i')
 			barraiy -= vbarra;
-		if (barraiy+40 < bolay and barraiy < 300 and bolax < vistaia)
+		if (barraiy+40 < bolay and barraiy < 300 and bolax < vistaia and direccionx == 'i')
 			barraiy += vbarra;
 	}
 	if (modo == 2){//codigo del segundo jugador
