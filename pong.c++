@@ -4,6 +4,10 @@
 using namespace sf;
 using namespace std;
 
+unsigned int division(unsigned int dividendo, unsigned int divisor) {
+    return (dividendo + (divisor/2)) / divisor;
+}
+
 int main() {
 RenderWindow ventana(VideoMode(600,400), "pong");
 
@@ -122,6 +126,7 @@ while (ventana.isOpen()){
 		if (Keyboard::isKeyPressed(Keyboard::Down) and barrady < 300)
 			barrady += vbarra;
 		int retraso = 0;
+		
 		if (puntosi < pvictoria and puntosd < pvictoria){
 			int limited = 580, limitei = 0;
 			if  (bolay < barrady+90 and barrady-10 < bolay)
@@ -143,13 +148,13 @@ while (ventana.isOpen()){
 			
 			if (bolax > limited and limited == 560){
 				direccionx = 'i';
-				angulo += 2-(100+(barrady+10-bolay))/25;
+				angulo += 2-division(100+(barrady-10-bolay),25);
 				if (sonidosactivados) 
 					boing.play();
 			}
 			if (bolax < limitei and limitei == 20){
 				direccionx = 'd';
-				angulo += 2-(100+(barraiy+10-bolay))/25;
+				angulo += 2-division(100+(barraiy-10-bolay),25);
 				if (sonidosactivados) 
 					boing.play();
 			}
