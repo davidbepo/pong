@@ -4,7 +4,7 @@
 using namespace sf;
 using namespace std;
 
-unsigned int division(unsigned int dividendo, unsigned int divisor) {
+inline unsigned int division(unsigned int dividendo, unsigned int divisor) {
     return (dividendo + (divisor/2)) / divisor;
 }
 
@@ -21,53 +21,41 @@ RectangleShape barrad(Vector2f(20,100)); barrad.setFillColor(Color::Cyan);
 CircleShape bola(10); bola.setFillColor(Color::Cyan);
 
 Font ubuntu; ubuntu.loadFromFile("Ubuntu-M.ttf");
-Text gana; gana.setFont(ubuntu); gana.setCharacterSize(77); gana.setFillColor(Color::Black);
+Text gana("",ubuntu,77); gana.setFillColor(Color::Black);
 
-Text uj; uj.setFont(ubuntu); uj.setString("1 jugador");
-uj.setCharacterSize(88); uj.setFillColor(Color::Black); uj.setPosition(64,10);
-Text dj; dj.setFont(ubuntu); dj.setString("2 jugadores");
-dj.setCharacterSize(88); dj.setFillColor(Color::Black); dj.setPosition(64,110);
-Text op; op.setFont(ubuntu); op.setString("opciones");
-op.setCharacterSize(88); op.setFillColor(Color::Black); op.setPosition(64,210);
+Text uj("1 jugador",ubuntu,88); uj.setFillColor(Color::Black); uj.setPosition(64,10);
+Text dj("2 jugadores",ubuntu,88); dj.setFillColor(Color::Black); dj.setPosition(64,110);
+Text op("opciones",ubuntu,88); op.setFillColor(Color::Black); op.setPosition(64,210);
 
-Text via; via.setFont(ubuntu); via.setString("vista de la ia");
-via.setCharacterSize(48); via.setFillColor(Color::Black); via.setPosition(10,10);
-Text nvia; nvia.setFont(ubuntu); nvia.setString("300");
-nvia.setCharacterSize(60); nvia.setFillColor(Color::Black); nvia.setPosition(480,10);
+Text via("vista de la ia",ubuntu,48); via.setFillColor(Color::Black); via.setPosition(10,10);
+Text nvia("300",ubuntu,60); nvia.setFillColor(Color::Black); nvia.setPosition(480,10);
 
-Text vel; vel.setFont(ubuntu); vel.setString("velocidad");
-vel.setCharacterSize(48); vel.setFillColor(Color::Black); vel.setPosition(10,85);
-Text nvel; nvel.setFont(ubuntu); nvel.setString("5");
-nvel.setCharacterSize(60); nvel.setFillColor(Color::Black); nvel.setPosition(480,85);
+Text vel("velocidad",ubuntu,48); vel.setFillColor(Color::Black); vel.setPosition(10,85);
+Text nvel("5",ubuntu,60); nvel.setFillColor(Color::Black); nvel.setPosition(480,85);
 
-Text delay; delay.setFont(ubuntu); delay.setString("retraso del sake");
-delay.setCharacterSize(48); delay.setFillColor(Color::Black); delay.setPosition(10,160);
-Text ndelay; ndelay.setFont(ubuntu); ndelay.setString("500");
-ndelay.setCharacterSize(60); ndelay.setFillColor(Color::Black); ndelay.setPosition(480,160);
+Text delay("retraso del sake",ubuntu,48); delay.setFillColor(Color::Black); delay.setPosition(10,160);
+Text ndelay("500",ubuntu,60); ndelay.setFillColor(Color::Black); ndelay.setPosition(480,160);
 
-Text sonidos; sonidos.setFont(ubuntu); sonidos.setString("activar sonidos");
-sonidos.setCharacterSize(48); sonidos.setFillColor(Color::Black); sonidos.setPosition(10,235);
-Text asonidos; asonidos.setFont(ubuntu); asonidos.setString("si");
-asonidos.setCharacterSize(60); asonidos.setFillColor(Color::Black); asonidos.setPosition(480,235);
+Text sonidos("activar sonidos",ubuntu,48); sonidos.setFillColor(Color::Black); sonidos.setPosition(10,235);
+Text asonidos("si",ubuntu,60); asonidos.setFillColor(Color::Black); asonidos.setPosition(480,235);
 
-Text aceptar; aceptar.setFont(ubuntu); aceptar.setString("aceptar");
-aceptar.setCharacterSize(66); aceptar.setFillColor(Color::Black); aceptar.setPosition(200,310);
+Text aceptar("aceptar",ubuntu,66); aceptar.setFillColor(Color::Black); aceptar.setPosition(200,310);
 
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
 Sprite flecha(tcyan);
 
-unsigned int vbolainicial = 4, vbarra = 3, vistaia = 300, rsake = 500;
+uint_fast16_t vbolainicial = 4, vbarra = 3, vistaia = 300, rsake = 500;
 bool sonidosactivados = true;
 inicio:
 ventana.setTitle("pong");
 flecha.setPosition(5,73);
 int barraiy = 140, barrady = 140, bolax = 280, bolay = 180;
-unsigned int vbola = vbolainicial, puntosi = 0, puntosd = 0;
+uint_fast8_t vbola = vbolainicial, puntosi = 0, puntosd = 0;
 char direccionx = 'd';
 char ganador = ' ';
-int angulo = -1;
-unsigned int pvictoria = 10;
-unsigned int modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1, sakeinicial = 1;
+int_fast8_t angulo = -1;
+uint_fast8_t pvictoria = 10;
+uint_fast8_t modo = 0, seleccion = 1, reiniciar = 1, ajuste = 1, sakeinicial = 1;
 
 while (ventana.isOpen()){
 	Event evento;
@@ -84,9 +72,9 @@ while (ventana.isOpen()){
 			if (evento.key.code == Keyboard::Escape)
 				goto inicio;
 		}
-	}//ventana.setFramerateLimit(10);
+	}
 	if (modo == 0){
-		int posicion[4] = {0,30,130,230};
+		int posicion[4] = {0,30,130,235};
 		if (arriba and seleccion > 1)
 			seleccion -= 1;
 		if (abajo and seleccion < 3)
@@ -107,7 +95,6 @@ while (ventana.isOpen()){
 		ventana.display();
 		sleep(milliseconds(20));
 	}
-	
 	if (modo == 1){// codigo de la ia
 		if (barraiy+40 > bolay and barraiy > 0 and bolax < vistaia and direccionx == 'i')
 			barraiy -= vbarra;
@@ -259,7 +246,7 @@ while (ventana.isOpen()){
 			retraso = 130;	
 			if (ajuste == 1 and vistaia < 600)
 				vistaia += 10;
-			if (ajuste == 2 and vbolainicial < 999)
+			if (ajuste == 2 and vbolainicial < 255)
 				vbolainicial += 1;
 			if (ajuste == 3 and rsake < 950)
 				rsake += 50;
