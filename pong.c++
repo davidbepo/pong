@@ -4,7 +4,7 @@
 using namespace sf;
 using namespace std;
 
-inline unsigned int division(unsigned int dividendo, unsigned int divisor) {
+inline uint division(uint dividendo, uint divisor) {
     return (dividendo + (divisor/2)) / divisor;
 }
 
@@ -15,31 +15,33 @@ Music boing; boing.openFromFile("Boing.ogg");
 Music boingp; boingp.openFromFile("Boingp.ogg");
 Music sii; sii.openFromFile("sii.ogg");
 
-RectangleShape barrai(Vector2f(20,100)); barrai.setFillColor(Color::Cyan);
-RectangleShape barrad(Vector2f(20,100)); barrad.setFillColor(Color::Cyan);
+Color negro = Color::Black; Color cyan = Color::Cyan;
 
-CircleShape bola(10); bola.setFillColor(Color::Cyan);
+RectangleShape barrai(Vector2f(20,100)); barrai.setFillColor(cyan);
+RectangleShape barrad(Vector2f(20,100)); barrad.setFillColor(cyan);
+
+CircleShape bola(10); bola.setFillColor(cyan);
 
 Font ubuntu; ubuntu.loadFromFile("Ubuntu-M.ttf");
-Text gana("",ubuntu,77); gana.setFillColor(Color::Black);
+Text gana("",ubuntu,77); gana.setFillColor(negro);
 
-Text uj("1 jugador",ubuntu,88); uj.setFillColor(Color::Black); uj.setPosition(64,10);
-Text dj("2 jugadores",ubuntu,88); dj.setFillColor(Color::Black); dj.setPosition(64,110);
-Text op("opciones",ubuntu,88); op.setFillColor(Color::Black); op.setPosition(64,210);
+Text uj("1 jugador",ubuntu,88); uj.setFillColor(negro); uj.setPosition(64,10);
+Text dj("2 jugadores",ubuntu,88); dj.setFillColor(negro); dj.setPosition(64,110);
+Text op("opciones",ubuntu,88); op.setFillColor(negro); op.setPosition(64,210);
 
-Text via("vista de la ia",ubuntu,48); via.setFillColor(Color::Black); via.setPosition(10,10);
-Text nvia("300",ubuntu,60); nvia.setFillColor(Color::Black); nvia.setPosition(480,10);
+Text via("vista de la ia",ubuntu,48); via.setFillColor(negro); via.setPosition(10,10);
+Text nvia("300",ubuntu,60); nvia.setFillColor(negro); nvia.setPosition(480,10);
 
-Text vel("velocidad",ubuntu,48); vel.setFillColor(Color::Black); vel.setPosition(10,85);
-Text nvel("5",ubuntu,60); nvel.setFillColor(Color::Black); nvel.setPosition(480,85);
+Text vel("velocidad",ubuntu,48); vel.setFillColor(negro); vel.setPosition(10,85);
+Text nvel("5",ubuntu,60); nvel.setFillColor(negro); nvel.setPosition(480,85);
 
-Text delay("retraso del sake",ubuntu,48); delay.setFillColor(Color::Black); delay.setPosition(10,160);
-Text ndelay("500",ubuntu,60); ndelay.setFillColor(Color::Black); ndelay.setPosition(480,160);
+Text delay("retraso del sake",ubuntu,48); delay.setFillColor(negro); delay.setPosition(10,160);
+Text ndelay("500",ubuntu,60); ndelay.setFillColor(negro); ndelay.setPosition(480,160);
 
-Text sonidos("activar sonidos",ubuntu,48); sonidos.setFillColor(Color::Black); sonidos.setPosition(10,235);
-Text asonidos("si",ubuntu,60); asonidos.setFillColor(Color::Black); asonidos.setPosition(480,235);
+Text sonidos("activar sonidos",ubuntu,48); sonidos.setFillColor(negro); sonidos.setPosition(10,235);
+Text asonidos("si",ubuntu,60); asonidos.setFillColor(negro); asonidos.setPosition(480,235);
 
-Text aceptar("aceptar",ubuntu,66); aceptar.setFillColor(Color::Black); aceptar.setPosition(200,310);
+Text aceptar("aceptar",ubuntu,66); aceptar.setFillColor(negro); aceptar.setPosition(200,310);
 
 Texture tcyan; tcyan.loadFromFile("tcyan.png");
 Sprite flecha(tcyan);
@@ -95,10 +97,10 @@ while (ventana.isOpen()){
 		ventana.display();
 		sleep(milliseconds(20));
 	}
-	if (modo == 1){// codigo de la ia
-		if (barraiy+40 > bolay and barraiy > 0 and bolax < vistaia and direccionx == 'i')
+	if (modo == 1 and bolax < vistaia and direccionx == 'i'){// codigo de la ia
+		if (barraiy+40 > bolay and barraiy > 0)
 			barraiy -= vbarra;
-		if (barraiy+40 < bolay and barraiy < 300 and bolax < vistaia and direccionx == 'i')
+		if (barraiy+40 < bolay and barraiy < 300)
 			barraiy += vbarra;
 	}
 	if (modo == 2){//codigo del segundo jugador
@@ -165,8 +167,8 @@ while (ventana.isOpen()){
 				sii.play();
 			if (bolax >= 580 or bolax <= 0 or sakeinicial == 1){
 				sakeinicial = 0;
-				bolax = 280;
-				bolay = 180;
+				bolax = 290;
+				bolay = 190;
 				angulo = -1;
 				retraso = rsake;
 				barrady = 140;
